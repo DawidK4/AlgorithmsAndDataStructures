@@ -203,3 +203,15 @@ def counting_sort(a, l):
         counts[a[i]] -= 1
 
     return result 
+
+'''
+Has to have a helper algorithm.
+Helper has to be stable.
+'''
+def radix_sort(arr):
+    max_num = max(arr)
+
+    exp = 1
+    while max_num // exp > 0:
+        counting_sort(arr, exp)
+        exp *= 10
