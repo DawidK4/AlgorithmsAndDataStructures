@@ -1,3 +1,5 @@
+from LinkedLists import SinglyLinkedList
+
 '''
 Dominating operation: compairson of 2 elements
 Data size: arr length
@@ -86,5 +88,48 @@ def merge(a1, a2):
     while j < len(a2):
         result.append(a2[j])
         j += 1
+
+    return result
+
+'''
+
+'''
+def merge_sort_linked_list(head):
+    if not head or not head.next:
+        return head
+    
+    middle = get_middle(head)
+    next_to_middle = middle.next
+    middle.next = None 
+
+    left = merge_sort_linked_list(head)
+    right = merge_sort_linked_list(next_to_middle)
+
+    return merge_sorted_lists(left, right)
+
+def get_middle(head):
+    if not head:
+        return head
+    
+    slow, fast = head, head
+
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+
+    return slow 
+
+def merge_sorted_lists(left, right):
+    if not left:
+        return right
+    if not right:
+        return left
+
+    if left.data < right.data:
+        result = left
+        result.next = merge_sorted_lists(left.next, right)
+    else:
+        result = right
+        result.next = merge_sorted_lists(left, right.next)
 
     return result
