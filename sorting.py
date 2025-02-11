@@ -133,3 +133,45 @@ def merge_sorted_lists(left, right):
         result.next = merge_sorted_lists(left, right.next)
 
     return result
+
+'''
+Input: arr - an array of integers, l/r - Output: a natural integer that is an index of element p after reorganizing the array a 
+Output: None
+
+Time complexity is dependent on the depth of the recursion.
+
+When the p element would always be the middle of a subarray:  Θ(n · log(n)) (because the recursion tree would be perfectly balanced)
+
+When the p element would always be at the beginning of the end of a current subarray: W (n) = Θ(n^2)
+
+When the chanche of p being placed would be distributed with the equal probability:
+A(n) = Θ(n · log(n)) 
+'''
+def quicksort(arr, low, high):
+    if low < high:
+        pi = partition(arr, low, high)
+
+        quicksort(arr, low, pi - 1)
+        quicksort(arr, pi + 1, high)
+
+'''
+Input: arr - int array, l/r - item that is the first element on the left/right 
+(to the left of p are elements that are not greater, to the right - not smaller)
+
+Dominating operation: compairson of 2 elements of an array 
+Data size: length of a current array n = (r - l + 1)
+
+W(n) = A(n) = Θ(n)
+S(n) = O(1)
+'''
+def parition(arr, low, high):
+    pivot = arr[high] # Choose the last element as a pivot 
+    i = low - 1 # Pointer for the smaller element
+
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1 
+            arr[i], arr[j] = arr[j], arr[i]
+        
+    arr[i + 1], arr[high] = arr[j], arr[i + 1]
+    return i + 1
