@@ -175,3 +175,31 @@ def parition(arr, low, high):
         
     arr[i + 1], arr[high] = arr[j], arr[i + 1]
     return i + 1
+
+'''
+Input: a - an array of integers, l - array length 
+
+Dominating operation: assigning values in the array
+Data size: n - length of the array, m - max value in the array
+
+A(n, m) = W(n, m) = 2n + 2m = Θ(n + m)
+
+S(n, m) = n + m = Θ(n + m)
+'''
+def counting_sort(a, l):
+    max_value = max(a)
+
+    counts = [0] * (max_value + 1)
+    result = [0] * l
+
+    for i in range(l):
+        counts[a[i]] += 1 
+
+    for i in range(1, max_value + 1):
+        counts[i] += counts[i - 1]
+
+    for i in range(l - 1, -1, -1):
+        result[counts[a[i]]] = a[i]
+        counts[a[i]] -= 1
+
+    return result 
