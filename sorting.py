@@ -10,13 +10,23 @@ The algorithm will always do the same ammount of work, no matter how does the in
 '''
 def selection_sort(arr):
     n = len(arr)
+    print("Original array:", arr)
 
     for i in range(n):
+        print(f"Iteration: {i}")
+        print("Array before optional swap:", arr)
+        
         min_index = i
         for j in range(i + 1, n):
             if arr[j] < arr[min_index]:
                 min_index = j
-        arr[j], arr[min_index] = arr[min_index], arr[i]
+        
+        # Swap only if needed
+        if min_index != i:
+            arr[i], arr[min_index] = arr[min_index], arr[i]
+        
+        print("Array after optional swap:", arr)
+        print("----------------")
 
 '''
 Dominating operation: comparing 2 elements 
@@ -28,15 +38,23 @@ A(n) = Θ(n^2)
 def insertion_sort(arr):
     n = len(arr)
     
+    print("Initial array:", arr)
+    
     for i in range(1, n):
         key = arr[i]
         j = i - 1
 
+        print(f"\nIteration {i}: Inserting {key}")
+
         while j >= 0 and arr[j] > key:
-            arr[j+1] = arr[j]
+            arr[j + 1] = arr[j]
             j -= 1
+            print(f"  Moved {arr[j+1]} to position {j+2}: {arr}")  # Shows shifts
         
-        arr[j+1] = key
+        arr[j + 1] = key
+        print(f"  Inserted {key} at position {j+1}: {arr}")  # Shows insertion step
+
+    print("\nSorted array:", arr)
 
 '''
 Dominating operation: compairson of 2 elements or indicies 

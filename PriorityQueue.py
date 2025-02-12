@@ -56,4 +56,3 @@ class PriorityQueue:
     def is_empty(self):
         """Check if the priority queue is empty. (O(1))"""
         return len(self.heap) == 1
-
